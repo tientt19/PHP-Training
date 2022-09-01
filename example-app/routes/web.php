@@ -16,3 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/site', function () {
+    return view('site');
+});
+
+Route::get('/example', function () {
+    return 'Power of Route Laravel';
+});
+
+Route::get('users/{id}', function ($id) {
+    return 'This page route to user who has id '.$id;
+});
+
+Route::get('admin/post/home/example', array('as'=>'admin.home', function () {
+   $url = route('admin.home');
+
+   return "This is url ". $url;
+}));
