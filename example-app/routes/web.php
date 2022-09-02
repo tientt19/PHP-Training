@@ -101,3 +101,7 @@ Route::get('/findmore', function () {
     $posts = Post::where('id','<',50)->firstOrFail();
     return $posts;
 });
+
+Route::get('/tien', function () {
+    return 'This is my site';
+});
