@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,7 @@ Route::get('admin/post/home/example', array('as'=>'admin.home', function () {
 
    return "This is url ". $url;
 }));
+
+// Route::get('/post/{id}', [PostsController::class, 'index']);
+
+Route::resource('posts', PostsController::class);
