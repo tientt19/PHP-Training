@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\DB;
+use App\Models\Post;
+use function GuzzleHttp\Promise\all;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,10 +53,15 @@ Route::get('/insert', function () {
 
 Route::get('/read', function () {
 
-    $result = DB::select('select * from posts where id = ?', [1]);
+    // $result = DB::select('select * from posts where id = ?', [1]);
 
-    return $result;
+    $posts = Post::all();
 
+    foreach ($posts as $post) {
+        return $post->title;
+    }
+
+    // return $result;
     // foreach($result as $post) {
     //     return $post->title;
     // }
@@ -72,4 +79,25 @@ Route::get('/update', function () {
 Route::get('/delete', function () {
     $delete = DB::delete('delete from posts where id=?',[2]);
     return $delete;
+});
+
+
+Route::get('/find', function () {
+
+    $posts = Post::find(4);
+
+    return $posts;
+
+});
+
+Route::get('/findwhere', function () {
+
+    $posts = Post::where('id',4)->orderBy('id','desc')->take(1)->get();
+
+    return $posts;
+});
+
+Route::get('/findmore', function () {
+    $posts = Post::where('id','<',50)->firstOrFail();
+    return $posts;
 });
