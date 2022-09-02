@@ -38,4 +38,8 @@ Route::get('admin/post/home/example', array('as'=>'admin.home', function () {
 
 // Route::get('/post/{id}', [PostsController::class, 'index']);
 
+Route::get('/contact', [PostsController::class, 'contact']);
+
+Route::get('/post/contact/{id}/{name}/{passwords}', [PostsController::class, 'show_contact']);
+
 Route::resource('posts', PostsController::class);
