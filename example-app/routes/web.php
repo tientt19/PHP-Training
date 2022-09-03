@@ -58,7 +58,7 @@ Route::get('/read', function () {
     $posts = Post::all();
 
     foreach ($posts as $post) {
-        return $post->title;
+        return $posts;
     }
 
     // return $result;
@@ -104,4 +104,48 @@ Route::get('/findmore', function () {
 
 Route::get('/tien', function () {
     return 'This is my site';
+});
+
+Route::get('/basic_insert', function (){
+   $post = Post::find(1);
+   $post->title = 'insert new post';
+   $post->content = 'insert new content';
+   $post->is_admin = 1;
+   $post->save();
+
+   return $post;
+});
+
+Route::get('/create', function (){
+    Post::create(['title'=>'testing create new title', 'content'=>'testing create new content', 'is_admin'=>'1']);
+});
+
+Route::get('/update', function (){
+   Post::where('id',5)->where('is_admin',0)->update(['title'=>'New update title','content'=>'new update content','is_admin'=>'1']);
+});
+
+Route::get('/delete', function () {
+//    Post::destroy(8);
+    Post::destroy([10,11]);
+//    Post::where('is_admin',0)->delete();
+});
+
+Route::get('/soft_delete', function () {
+    Post::find(75)->delete();
+});
+
+Route::get('/readsoftdelete', function (){
+   $post = Post::withTrashed()->get();
+//    $post = Post::onlyTrashed()->where('is_admin',1)->get();
+   return $post;
+});
+
+Route::get('/restore', function () {
+  $post = Post::withTrashed()->restore();
+  return $post;
+});
+
+Route::get('/forcedelete', function () {
+   $post = Post::onlyTrashed()->forceDelete();
+   return $post;
 });
