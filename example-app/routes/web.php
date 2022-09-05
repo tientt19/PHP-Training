@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\User;
@@ -168,3 +169,6 @@ Route::get('/posts', function () {
     }
 });
 
+Route::get('/get_posts', [Controller::class,'get_post']);
+Route::get('posts_soft_delete', [Controller::class, 'soft_delete_post']);
+Route::get('read_soft_delete_post', [Controller::class, 'read_soft_delete_post']);
