@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use App\Models\User;
 
 class PostsController extends Controller
 {
@@ -92,5 +95,10 @@ class PostsController extends Controller
     {
         // return view('post_contact')->with('id',$id);
         return view('post_contact', compact('id', 'name', 'password'));
+    }
+
+    public function  get_role_name($id) {
+        $user = User::find($id)->roles()->orderBy('id', 'desc')->get();
+        return $user;
     }
 }
