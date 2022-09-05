@@ -17,4 +17,8 @@ class Post extends Model
       'content',
       'is_admin'
     ];
+
+    public function user() {
+        return $this->belongsTo('App\Models\User');
+    }
 }

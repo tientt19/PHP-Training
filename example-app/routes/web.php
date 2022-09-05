@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\DB;
 use App\Models\Post;
+use App\Models\User;
+
 use function GuzzleHttp\Promise\all;
 
 /*
@@ -149,3 +151,20 @@ Route::get('/forcedelete', function () {
    $post = Post::onlyTrashed()->forceDelete();
    return $post;
 });
+
+Route::get('/user/{id}/post', function ($id) {
+    return User::find($id)->post;
+});
+
+Route::get('/post/{id}/user', function ($id) {
+   return Post::find($id)->user;
+});
+
+Route::get('/posts', function () {
+    $user = User::find(1);
+
+    foreach ($user->posts as $post) {
+        echo $post;
+    }
+});
+
