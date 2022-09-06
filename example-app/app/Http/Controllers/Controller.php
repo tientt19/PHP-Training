@@ -28,4 +28,12 @@ class Controller extends BaseController
         $post = Post::withTrashed()->get();
         return $post;
     }
+
+    public function user_pivot() {
+        $user = User::find(1);
+
+        foreach ($user->roles as $role) {
+            return $role;
+        }
+    }
 }
