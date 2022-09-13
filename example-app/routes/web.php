@@ -179,4 +179,16 @@ Route::get('user/{id}/role', [PostsController::class, 'get_role_name']);
 Route::get('user/{id}/pivot/role', 'RoleController@get_user_pivot');
 Route::get('user/pivot', [Controller::class, 'user_pivot']);
 Route::get('get_country', [CountryController::class, 'get_country']);
-Route::get('user/country', [CountryController::class, 'user_country']);
+Route::get('user_country', [CountryController::class, 'user_country']);
+
+//Route::get('get/photos', [\App\Http\Controllers\PhotoController::class, 'get_photo']);
+
+Route::get('get/photos', function () {
+    $user = User::find(1);
+
+    foreach ($user->photos as $photo) {
+        return $photo->get();
+    }
+
+//    return $user;
+});

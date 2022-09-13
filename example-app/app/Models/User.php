@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Photo;
 
 class User extends Authenticatable
 {
@@ -52,5 +53,13 @@ class User extends Authenticatable
 
     public function roles() {
         return $this->belongsToMany('App\Models\Role')->withPivot('created_at');
+    }
+
+//    public function photos() {
+//        return $this->morphMany('\App\Models\Photo', 'imageable');
+//    }
+
+    public function photos() {
+        return $this->morphMany('App\Models\Photo', 'imageable');
     }
 }

@@ -12,12 +12,10 @@ class CountryController extends Controller
     }
 
     public function user_country() {
-//        $country = Country::find(1);
-//
-//        foreach ($country->posts as $post) {
-//            echo $post->title;
-//        }
+        $country = Country::find(1);
 
-        return Country::find(1)->posts;
+        foreach ($country->posts as $post) {
+            return $post;
+        }
     }
 }
