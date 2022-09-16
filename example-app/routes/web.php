@@ -184,11 +184,16 @@ Route::get('user_country', [CountryController::class, 'user_country']);
 //Route::get('get/photos', [\App\Http\Controllers\PhotoController::class, 'get_photo']);
 
 Route::get('get/photos', function () {
-    $user = User::find(1);
+    $post = Post::find(1);
 
-    foreach ($user->photos as $photo) {
-        return $photo->get();
+    foreach ($post->photos as $photo) {
+        return $photo;
     }
 
 //    return $user;
 });
+
+
+Route::get('photo/{id}/post', [\App\Http\Controllers\PhotoController::class, 'get_photo_post']);
+
+Route::get('tag/get', [\App\Http\Controllers\TagController::class, 'get_tag']);
